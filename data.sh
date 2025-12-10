@@ -28,6 +28,6 @@ chmod 750 /home/adminuser
 chgrp poweruser /home/adminuser
 
 ln -s /etc/mtab /home/poweruser/mtab-link
-chown poweruser:poweruser /home/poweruser/mtab-link
+
 
 systemctl restart sshd
