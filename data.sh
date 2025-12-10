@@ -2,14 +2,20 @@
 
 apt update -y
 
+PASSWORD=$(openssl rand -base64 12)
+
+HASH=$(openssl passwd -6 "$PASSWORD")
+
 useradd -m -s /bin/bash adminuser
-echo "adminuser:123" | chpasswd
+usermod -p "$HASH" adminuser
 usermod -aG sudo adminuser
+
+echo "adminuser password: $PASSWORD" > /root/adminuser_password.txt
+chmod 600 /root/adminuser_password.txt
 
 sed -i 's/^#PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
 sed -i 's/^PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
 sed -i 's/^#KbdInteractiveAuthentication.*/KbdInteractiveAuthentication yes/' /etc/ssh/sshd_config
-
 sed -i 's/^PermitEmptyPasswords.*/PermitEmptyPasswords no/' /etc/ssh/sshd_config
 
 useradd -m -s /bin/bash poweruser
