@@ -1,0 +1,10 @@
+/var/log/
+*.log
+
+*.swp
+*.swo
+*.tmp
+
+/root/
+*.pem
+*.key
