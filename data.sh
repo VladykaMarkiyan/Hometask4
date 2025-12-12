@@ -24,5 +24,3 @@ usermod -aG adminuser poweruser
 chmod 750 /home/adminuser
 
 ln -s /etc/mtab /home/poweruser/mtab-link
-
-systemctl restart sshd
